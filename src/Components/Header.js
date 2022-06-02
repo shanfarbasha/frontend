@@ -1,117 +1,142 @@
 import * as React from 'react';
+import logo from '../logo.svg';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-//import Link from '@mui/material/Link';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import NotificationsIcon from '@mui/icons-material/Notifications';
-import Tab from '@mui/material/Tab';
-//import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-//import MenuIcon from '@mui/icons-material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import Typography from '@mui/material/Typography';
-import { cyan } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 import Menu from '@mui/material/Menu';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import Link from '@mui/material/Link';
 
-const headercolor = cyan['A100'];
-const lightColor = 'rgba(255, 255, 255, 0.7)';
+const headercolor = blue['#2196f3'];
+//const lightColor = 'rgba(255, 255, 255, 0.7)';
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const  Header = () =>{
-    //const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-    //  const handleOpenNavMenu = (e) => {
-    //  setAnchorElNav(e.currentTarget);
-    //  };
-     const handleOpenUserMenu = (e) => {
-       setAnchorElUser(e.currentTarget);
-     };
-  
-    // const handleCloseNavMenu = () => {
-    //   setAnchorElNav(null);
-    // };
-  
-    const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
+const pages = ['Products', 'Pricing', 'Blog'];
+const  Header = (props) =>{
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+      const handleOpenNavMenu = (e) => {
+      setAnchorElNav(e.currentTarget);
+      };
+     const handleClick = (e) => {
+        if (anchorEl !== e.currentTarget) {
+          setAnchorEl(e.currentTarget);
+        }
+      }
+     const handleCloseNavMenu = () => {
+       setAnchorElNav(null);
     };
-
+  
+    const handleClose = (e) => {
+        setAnchorEl(null);
+    };
+    const isLoggedIn  = React.useState("false");
   return (
     <>
       <AppBar
         component="div"
         position="static"
         elevation={0}
-        sx={{ zIndex: 0 ,
+        sx={{ 
             background:headercolor,
               p:1
             }}
       >
         <Toolbar>
           <Grid container alignItems="center" spacing={0}>
-            <Grid xs={6} md={4}>
+            <Grid xs={6} md={2}>
           
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+            <Link href="#" underline="none">
+            <img src={logo} sx={{ display: { xs: 'none', md: 'flex' }, mr: 2}} alt="logo" /></Link>
           </Grid>
-            <Grid item spacing={2}  xs={4} md={6} >
-                <div style= {{display:"flex"}}>
-            <Tabs value={0} textColor="inherit">
-          <Tab label="Users" />
-          <Tab label="Sign-in method" />
-          <Tab label="Templates" />
-          <Tab label="Usage" />
-        </Tabs>
-          
-            
-            
-              <Button
-                sx={{ borderColor: lightColor }}
-                variant="outlined"
-                color="inherit"
-                size="small"
-              >
-                Web setup
-              </Button></div>
+            <Grid item spacing={2}  xs={4} md={8} >
+                
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="left">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>    
             </Grid>
             <Grid  xs={2} md={2}>
 
-        
-          <IconButton color="inherit">
-                <LocalMallIcon />
-                </IconButton>
+            <Tooltip title="Cart empty" sx={{ 
+              mx:2
+             }}>
+            <Badge color="secondary" badgeContent={0} showZero>
+                <LocalMallIcon />  
+                </Badge>
+                </Tooltip>
+                
+                   {
+        isLoggedIn ? (
+            <Button href="/login"
+                variant="outlined">
+                Login
+              </Button>
+              
+         ):(
             <Tooltip title="Open settings">
            
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton  sx={{ p: 0 }}
+                aria-owns={anchorEl ? "simple-menu" : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+                onMouseOver={handleClick}
+              >
+                <Avatar alt="Remy Sharp"
+                  >  S </Avatar>
               </IconButton>
-            </Tooltip>
+            </Tooltip> )}
             <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              MenuListProps={{ onMouseLeave: handleClose }}
+              sx={{ mt: '45px',
+              p:1
+             }}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -121,15 +146,14 @@ const  Header = () =>{
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+    
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleClose}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> 
           {/* </Box> */}
           </Grid>
             </Grid>
