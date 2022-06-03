@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React,{ useState } from 'react'; 
+import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,12 +13,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Header from '../Components/Header';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const theme = createTheme({
     palette: {
         primary: {
-          main: '#00e5ff',
+          main: '#ff5722',
         },
         secondary: {
           main: '#f44336',
@@ -25,15 +26,47 @@ const theme = createTheme({
       },
 });
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 export default function Signup() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const id = uuidv4();
+  const history = useHistory();
+
+  //api integration
+  async function register(){
+    let item =[username,email,password]
+    console.log(item);
+
+    let result = await fetch ('https://api.m3o.com/v1/user/Create', {
+      method: 'POST',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer OTMyMjk1N2EtM2E5MC00MDcwLTlhMGYtZWNlYWQ0NmFkYzhk'
+      },
+      body: JSON.stringify({
+        "email":email,
+        "id": id,
+        "password":password,
+        "username" : username
+      })
+    })
+    history.push("/");
+    result = await result.json()
+    console.warm("result",result);
+
+  }
 
   return (
 
@@ -70,28 +103,45 @@ export default function Signup() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate 
+            // onSubmit={handleSubmit} 
+            sx={{ mt: 1 }}>
+            <TextField margin="normal"
+                required
+                fullWidth
+                value={username}
+                onChange={(e) => {setUsername(e.target.value)}}
+                id="name"
+                label="Name"
+                name="name"
+                autoComplete="name"
+                autoFocus />
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="email"
+                value={email}
+                onChange={(e) => {setEmail(e.target.value)}}
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus
+
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
+                value={password}
+                onChange={(e) => {setPassword(e.target.value)}}
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
-              <TextField
+              {/* <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -100,7 +150,7 @@ export default function Signup() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
+              /> */}
               <Box
               sx={{
                 alignItems: 'center',
@@ -119,7 +169,6 @@ export default function Signup() {
                 {' '}
                 <Link
                   href="#"
-                  passHref
                 >
                   <Link
                     color="primary"
@@ -132,6 +181,7 @@ export default function Signup() {
               </Typography>
             </Box>
               <Button
+               onClick={register}
                 type="submit"
                 fullWidth
                 variant="contained"

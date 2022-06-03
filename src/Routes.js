@@ -1,21 +1,29 @@
 import * as React from "react";
-import {BrowserRouter as Router, Switch,Route} from "react-router-dom";
-// import HomePage from "./Pages/HomePage";
+import {BrowserRouter,
+  Routes,
+  Route,} from "react-router-dom";
+  import App from "./App"
+ import HomePage from "./Pages/HomePage";
 import LogInPage from "./Pages/loginPage"
 import Signup from "./Pages/signup";
 
 
 
-export const Routes = () => {
+export const Routees = () => {
   return (
     
-      <Router>
-          <Switch>
-            {/* <Route path="/"><HomePage /></Route> */}
-            <Route path="/signup"><Signup /></Route>
-            <Route path="/login"><LogInPage /></Route>
+    <BrowserRouter>
+    <Routes>
 
-          </Switch>
-      </Router>
+       <Route path="/" index element={<App />}>
+       
+         <Route index element={<HomePage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<LogInPage />} />
+            </Route>
+            </Routes>
+
+            </BrowserRouter>
+   
   );
 }

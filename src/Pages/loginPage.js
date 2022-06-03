@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React,{ useState } from 'react'; 
+// import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,13 +17,40 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
     palette: {
         primary: {
-          main: '#00e5ff',
+          main: '#ff5722',
         },
         secondary: {
           main: '#f44336',
         },
       },
 });
+// const [username, setUsername] = useState("");
+// const [email, setEmail] = useState("");
+// const [password, setPassword] = useState("");
+
+// async function login(){
+//   let item =[username,email,password]
+//   console.log(item);
+
+//   let result = await fetch ('https://api.m3o.com/v1/user/Create', {
+//     method: 'POST',
+//     headers:{
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json',
+//       'Authorization': 'Bearer OTMyMjk1N2EtM2E5MC00MDcwLTlhMGYtZWNlYWQ0NmFkYzhk'
+//     },
+//     body: JSON.stringify({
+//       "email":email,
+//       "id": id,
+//       "password":password,
+//       "username" : username
+//     })
+//   })
+//   history.push("/");
+//   result = await result.json()
+//   console.warm("result",result);
+
+// }
 
 export default function LogInPage() {
   const handleSubmit = (event) => {
@@ -69,7 +97,9 @@ export default function LogInPage() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" 
+            noValidate onSubmit={handleSubmit} 
+            sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
