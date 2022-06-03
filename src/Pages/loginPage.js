@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'; 
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -24,43 +24,42 @@ const theme = createTheme({
         },
       },
 });
-// const [username, setUsername] = useState("");
-// const [email, setEmail] = useState("");
-// const [password, setPassword] = useState("");
-
-// async function login(){
-//   let item =[username,email,password]
-//   console.log(item);
-
-//   let result = await fetch ('https://api.m3o.com/v1/user/Create', {
-//     method: 'POST',
-//     headers:{
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json',
-//       'Authorization': 'Bearer OTMyMjk1N2EtM2E5MC00MDcwLTlhMGYtZWNlYWQ0NmFkYzhk'
-//     },
-//     body: JSON.stringify({
-//       "email":email,
-//       "id": id,
-//       "password":password,
-//       "username" : username
-//     })
-//   })
-//   history.push("/");
-//   result = await result.json()
-//   console.warm("result",result);
-
-// }
 
 export default function LogInPage() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
+  
+const history = useHistory();
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+async function login(){
+  let item =[email,password]
+  console.log(item);
+
+  let result = await fetch ('https://api.m3o.com/v1/user/Create', {
+    method: 'POST',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer OTMyMjk1N2EtM2E5MC00MDcwLTlhMGYtZWNlYWQ0NmFkYzhk'
+    },
+    body: JSON.stringify({
+      "email":email,
+      "password":password
+    })
+  })
+  history.push("/");
+  result = await result.json()
+  console.warm("result",result);
+
+}
 
   return (
 
@@ -98,7 +97,7 @@ export default function LogInPage() {
               Sign in
             </Typography>
             <Box component="form" 
-            noValidate onSubmit={handleSubmit} 
+            // noValidate onSubmit={handleSubmit} 
             sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -107,6 +106,8 @@ export default function LogInPage() {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={email}
+                onChange={(e) => {setEmail(e.target.value)}}
                 autoComplete="email"
                 autoFocus
               />
@@ -118,9 +119,12 @@ export default function LogInPage() {
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => {setPassword(e.target.value)}}
                 autoComplete="current-password"
               />
               <Button
+               onClick={login}
                 type="submit"
                 fullWidth
                 variant="contained"
