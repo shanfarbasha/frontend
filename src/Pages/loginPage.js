@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'; 
+import React,{ useEffect, useState } from 'react'; 
 import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -39,24 +39,37 @@ const history = useHistory();
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
+useEffect(() => {
+  if (localStorage.getItem('user-info')){
+    history.push("/")
+  }
+});
+
 async function login(){
+  console.warn(email.password);
   let item =[email,password]
   console.log(item);
-
-  let result = await fetch ('https://api.m3o.com/v1/user/Create', {
+  const data = {"email":email,
+  "password":password}
+  let result = await fetch('https://api.m3o.com/v1/user/Login', {
     method: 'POST',
     headers:{
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer OTMyMjk1N2EtM2E5MC00MDcwLTlhMGYtZWNlYWQ0NmFkYzhk'
+      'Authorization': 'Bearer ZWE4YTFlZWMtMDAzNC00ZGYzLWE0YTQtZDA0Y2QwYTBhZTM2'
     },
     body: JSON.stringify({
-      "email":email,
-      "password":password
+      data
     })
+    .then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+})
   })
-  history.push("/");
+  
   result = await result.json()
+  localStorage.setItem('user',JSON.stringify(result));
+  history.push("/")
   console.warm("result",result);
 
 }

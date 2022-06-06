@@ -53,7 +53,7 @@ export default function Signup() {
       headers:{
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer OTMyMjk1N2EtM2E5MC00MDcwLTlhMGYtZWNlYWQ0NmFkYzhk'
+        'Authorization': 'Bearer ZWE4YTFlZWMtMDAzNC00ZGYzLWE0YTQtZDA0Y2QwYTBhZTM2'
       },
       body: JSON.stringify({
         "email":email,
