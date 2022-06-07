@@ -256,6 +256,7 @@ export default function PrimarySearchAppBar() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
+              
               }}
             >
               {pages.map((page) => (

@@ -1,5 +1,4 @@
-import React,{ useEffect, useState } from 'react'; 
-import { useHistory } from 'react-router-dom';
+import React from 'react'; 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -35,44 +34,53 @@ export default function LogInPage() {
   //   });
   // };
   
-const history = useHistory();
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
 
-useEffect(() => {
-  if (localStorage.getItem('user-info')){
-    history.push("/")
-  }
-});
+// const [email, setEmail] = useState("");
+// const [password, setPassword] = useState("");
 
-async function login(){
-  console.warn(email.password);
-  let item =[email,password]
-  console.log(item);
-  const data = {"email":email,
-  "password":password}
-  let result = await fetch('https://api.m3o.com/v1/user/Login', {
-    method: 'POST',
-    headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ZWE4YTFlZWMtMDAzNC00ZGYzLWE0YTQtZDA0Y2QwYTBhZTM2'
-    },
-    body: JSON.stringify({
-      data
-    })
-    .then(response => response.json())
-.then(data => {
-  console.log('Success:', data);
-})
-  })
+// const [showPassword, setShowPassword] = React.useState(false);
+//     const handleClickShowPassword = () => {
+//         setShowPassword(!showPassword);
+//     };
+
+//     const handleMouseDownPassword = (event) => {
+//         event.preventDefault();
+//     };
+
+// useEffect(() => {
+//   if (localStorage.getItem('user-info')){
+//     history.push("/")
+//   }
+// });
+
+// async function login(){
+//   console.warn(email.password);
+//   let item =[email,password]
+//   console.log(item);
+//   const data = {"email":email,
+//   "password":password}
+//   let result = await fetch('https://api.m3o.com/v1/user/Login', {
+//     method: 'POST',
+//     headers:{
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json',
+//       'Authorization': 'Bearer ZWE4YTFlZWMtMDAzNC00ZGYzLWE0YTQtZDA0Y2QwYTBhZTM2'
+//     },
+//     body: JSON.stringify({
+//       data
+//     })
+//     .then(response => response.json())
+// .then(data => {
+//   console.log('Success:', data);
+// })
+//   })
   
-  result = await result.json()
-  localStorage.setItem('user',JSON.stringify(result));
-  history.push("/")
-  console.warm("result",result);
+//   result = await result.json()
+//   localStorage.setItem('user',JSON.stringify(result));
+//   history.push("/")
+//   console.warm("result",result);
 
-}
+// }
 
   return (
 
@@ -112,18 +120,7 @@ async function login(){
             <Box component="form" 
             // noValidate onSubmit={handleSubmit} 
             sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                value={email}
-                onChange={(e) => {setEmail(e.target.value)}}
-                autoComplete="email"
-                autoFocus
-              />
+              
               <TextField
                 margin="normal"
                 required
@@ -132,12 +129,12 @@ async function login(){
                 label="Password"
                 type="password"
                 id="password"
-                value={password}
-                onChange={(e) => {setPassword(e.target.value)}}
+                // value={password}
+                // onChange={(e) => {setPassword(e.target.value)}}
                 autoComplete="current-password"
               />
               <Button
-               onClick={login}
+              //  onClick={login}
                 type="submit"
                 fullWidth
                 variant="contained"

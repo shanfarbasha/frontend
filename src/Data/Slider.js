@@ -1,7 +1,7 @@
 export const ApiSlides = [
     {
       id:'1',
-      src: "https://image.freepik.com/free-photo/happy-woman-shopping-with-shopping-bags_1150-20495.jpg",
+      src: '../assetes/banner/banner-1.jpg',
       content: {
         h2: "Amazing Deals this Summer",
         p: "Upto 40% off",
@@ -10,7 +10,7 @@ export const ApiSlides = [
     },
     {
       id:'2',
-      src: 'https://st3.depositphotos.com/7713882/17906/i/600/depositphotos_179068502-stock-photo-happy-woman-showing-good-big.jpg',
+      src: '../assetes/banner/banner-2.jpg',
       active: true,
       content: {
         h2: "Bhai mein dosry number wala hn",
@@ -18,4 +18,14 @@ export const ApiSlides = [
       },
       background: ' bg-[#ffd028]'
     },
+    {
+      id:'3',
+      src: "../assetes/banner/banner-3.jpg",
+      active: true,
+      content: {
+        h2: "Bhai mein dosry number wala hn",
+        p: "Upto 40% off",
+      },
+      background: ' bg-[#ffd028]'
+    }
     ]
