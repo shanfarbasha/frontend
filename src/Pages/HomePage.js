@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import Annoucement from '../Components/Annoucement';
 import Header from '../Components/Header';
+import ProductCard from '../Components/shop/Productcard/ProductCard';
 import Slider from '../Components/Slider/Slider';
 
 const HomePage = () => {
@@ -16,10 +17,13 @@ const HomePage = () => {
 
                  <Slider />
               </Grid>
-              <Box>
 
+              <Grid sm={6} md={3} >
+              <Box>
+               <ProductCard />
+               <ProductCard />
               </Box>
-          </Grid>
+          </Grid></Grid>
         </>
     );
 }

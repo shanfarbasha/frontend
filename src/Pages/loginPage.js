@@ -10,19 +10,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Header from '../Components/Header';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-const theme = createTheme({
-    palette: {
-        primary: {
-          main: '#ff5722',
-        },
-        secondary: {
-          main: '#f44336',
-        },
-      },
-});
+
+
 
 export default function LogInPage() {
   // const handleSubmit = (event) => {
@@ -84,7 +75,7 @@ export default function LogInPage() {
 
   return (
 
-    <ThemeProvider theme={theme}>
+    <>
         <Header />
       <Grid container component="main" sx={{ height: '90vh' }}>
         <CssBaseline />
@@ -159,6 +150,6 @@ export default function LogInPage() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 }

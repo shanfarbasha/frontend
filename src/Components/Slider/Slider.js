@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Slider.css";
 import {ApiSlides} from '../../Data/Slider';
+import image from '../../Data/banner/banner-3.jpg'
 const Slider = () => {
 
   //States
@@ -16,7 +17,7 @@ const Slider = () => {
           return (
       <div  key={i} className="carousel-item active">
         
-        <img  key={i} src={slide.src} className="d-block w-100 h-70" alt="..." />
+        <img  key={i} src={image} className="d-block w-100 " alt="..." />
       </div>
       );
       })}

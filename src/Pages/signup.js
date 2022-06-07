@@ -12,19 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Header from '../Components/Header';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import { v4 as uuidv4 } from 'uuid';
 
-const theme = createTheme({
-    palette: {
-        primary: {
-          main: '#ff5722',
-        },
-        secondary: {
-          main: '#f44336',
-        },
-      },
-});
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function Signup() {
@@ -70,7 +61,7 @@ export default function Signup() {
 
   return (
 
-    <ThemeProvider theme={theme}>
+    <>
         <Header />
       <Grid container component="main" sx={{ height: '90vh' }}>
         <CssBaseline />
@@ -206,6 +197,6 @@ export default function Signup() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 }
