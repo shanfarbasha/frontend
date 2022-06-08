@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Logo from '../../assets/logo_shanfar.png';
@@ -16,7 +15,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Button } from '@mui/material';
 import SearchBar from './Search';
-import { Link } from 'react-router-dom';
 
 
 const pages = [{name:'Products',
@@ -144,11 +142,11 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 3 }} />
          <SearchBar /> <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
              
                href={page.url}
-                key={page}
+                key={index}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >

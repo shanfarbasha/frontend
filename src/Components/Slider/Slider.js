@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Slider.css";
 import {ApiSlides} from '../../Data/Slider';
-import image from '../../Data/banner/banner-3.jpg'
 const Slider = () => {
 
   //States
@@ -12,12 +11,14 @@ const Slider = () => {
     <>
     <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
     <div className="carousel-inner">
-    {slides.map((slide,i ) => {
+    {slides.map((slide ) => {
        
           return (
-      <div  key={i} className="carousel-item active">
+      <div  key={slide} className="carousel-item active">
         
-        <img  key={i} src={image} className="d-block w-100 " alt="..." />
+        <img  key={slide} src={slide.src} className="d-block w-100 " alt="..." />
+        <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5></div>
       </div>
       );
       })}

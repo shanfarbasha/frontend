@@ -1,7 +1,10 @@
 import React from 'react'
+import Breadcums from '../Components/Breadcums'
 
-export default function Products() {
+export default function Products(props) {
   return (
-    <div>Products</div>
+    <>
+    <Breadcums page="shop" />
+    </>
   )
 }
