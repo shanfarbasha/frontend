@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import Annoucement from '../Components/Annoucement';
-import Header from '../Components/Header';
+import Header from '../Components/Header/Header';
 import ProductCard from '../Components/shop/Productcard/ProductCard';
 import Slider from '../Components/Slider/Slider';
 

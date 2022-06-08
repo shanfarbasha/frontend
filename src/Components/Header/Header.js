@@ -1,64 +1,26 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Logo from '../assets/logo_shanfar.png';
+import Logo from '../../assets/logo_shanfar.png';
 // import Link from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Button } from '@mui/material';
+import SearchBar from './Search';
+import { Link } from 'react-router-dom';
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: "#fff",
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 1),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  color:"#ff0000",
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color:"ff0000" ,
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',alignItems: 'center',
-    [theme.breakpoints.up('md')]: {
-      width: '30ch',
-    },
-  },
-}));
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [{name:'Products',
+                url:"/Checkout"},{name: 'Pricing'},{name: 'Blog'}];
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -162,7 +124,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static"sx={{p:1}} >
+      <AppBar position="static" sx={{p:1}} >
         <Toolbar>
           {/* <IconButton
             size="large"
@@ -179,24 +141,18 @@ export default function PrimarySearchAppBar() {
             </a>
             
           
-          <Box sx={{ flexGrow: 1 }} />
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <Box sx={{ flexGrow: 3 }} />
+         <SearchBar /> <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
+             
+               href={page.url}
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
@@ -204,7 +160,7 @@ export default function PrimarySearchAppBar() {
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             
-            <Button href="/login" variant='outline'>Login</Button>
+            <Button href="/login" variant="contained" sx={{ color: 'black' ,borderColor: '#e6e6e6',borderStyle: 'solid', borderWidth: '2px'}} >Login</Button>
             <IconButton
               size="large"
               edge="end"
@@ -261,7 +217,7 @@ export default function PrimarySearchAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

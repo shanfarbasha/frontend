@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import HomePage from "./Pages/HomePage"
 import Signup from "./Pages/signup"
 import LogInPage from "./Pages/loginPage";
+import Checkout from "./Pages/Checkout";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/" ><HomePage /></Route>
         <Route path="/signup" ><Signup /></Route>
         <Route path="/login" ><LogInPage /></Route>
+        <Route path="/checkout" ><Checkout /></Route>
      </Switch>
      </Router>
       
